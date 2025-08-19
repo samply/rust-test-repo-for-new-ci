@@ -1,0 +1,6 @@
+[package]
+name = "rust-test-repo-for-new-ci"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
