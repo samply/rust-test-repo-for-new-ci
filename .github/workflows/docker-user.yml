@@ -1,4 +1,4 @@
-name: Publish Docker image
+name: Build and push Docker image
 
 on:
   # Uncomment to enable nightly builds
@@ -13,7 +13,7 @@ on:
   pull_request:
 
 jobs:
-  push_to_registry:
+  docker:
     uses: ./.github/workflows/docker-reusable.yml
     with:
       image_name: samply/rust-test-repo-for-new-ci
