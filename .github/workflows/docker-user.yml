@@ -1,9 +1,16 @@
 name: Publish Docker image
 
 on:
+  # Uncomment to enable nightly builds
+  # schedule:
+  #   - cron: 0 0 * * *
   push:
     branches:
       - main
+      - develop
+    tags:
+      - v*.*.*
+  pull_request:
 
 jobs:
   push_to_registry:
