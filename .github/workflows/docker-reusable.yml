@@ -68,6 +68,7 @@ jobs:
           cache-dir: cache-mount
           dockerfile: Dockerfile
           # skip-extraction: ${{ steps.cache.outputs.cache-hit }}
+          skip-extraction: false
 
       - name: Build and push
         uses: docker/build-push-action@v6
