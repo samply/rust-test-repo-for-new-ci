@@ -61,8 +61,6 @@ jobs:
         with:
           path: cache-mount
           key: ${{ runner.os }}-cache-mount-${{ hashFiles('Dockerfile') }}
-      - name: Find cache-mount (custom post step)
-        uses: ./.github/actions/find-cache-mount
 
       - name: Restore Docker cache mounts
         uses: reproducible-containers/buildkit-cache-dance@v3

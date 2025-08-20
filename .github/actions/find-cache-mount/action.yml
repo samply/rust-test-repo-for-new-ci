@@ -1,6 +1,0 @@
-name: 'Find cache-mount'
-description: 'Lists contents of cache-mount in post step.'
-runs:
-  using: 'node12'
-  main: 'index.js'
-  post: 'post.js'
