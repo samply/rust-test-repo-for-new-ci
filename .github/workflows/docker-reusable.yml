@@ -52,12 +52,11 @@ jobs:
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
-        id: setup-buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Cache
         uses: actions/cache@v4
-        id: cache
+        # id: cache
         with:
           path: cache-mount
           key: ${{ runner.os }}-cache-mount-${{ hashFiles('Dockerfile') }}
@@ -65,10 +64,10 @@ jobs:
       - name: Restore Docker cache mounts
         uses: reproducible-containers/buildkit-cache-dance@v3
         with:
-          builder: ${{ steps.setup-buildx.outputs.name }}
+          # builder: ${{ steps.setup-buildx.outputs.name }}
           cache-dir: cache-mount
           dockerfile: Dockerfile
-          skip-extraction: ${{ steps.cache.outputs.cache-hit }}
+          # skip-extraction: ${{ steps.cache.outputs.cache-hit }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
