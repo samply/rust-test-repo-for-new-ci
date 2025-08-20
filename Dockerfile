@@ -4,7 +4,7 @@ COPY . .
 RUN --mount=type=cache,target=/usr/src/app/target/ \
     # --mount=type=cache,target=/usr/local/cargo/git/db \
     # --mount=type=cache,target=/usr/local/cargo/registry/ \
-    cargo install --path . && find target
+    cargo install --path .
 
 # FROM debian:trixie-slim
 # # RUN apt-get update && apt-get install -y extra-runtime-dependencies && rm -rf /var/lib/apt/lists/*
