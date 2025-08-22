@@ -5,7 +5,7 @@ What has been tested:
 - [ ] Images should be pushed to Docker Hub
 - [ ] Images should not be pushed to Docker Hub if triggered by a pull request
 - [ ] Rust dependencies should be cached in build cache
-- [ ] The build cache is shared between branches
+- [ ] The build cache should be shared between branches
 - [ ] Images should be built for AMD64 and ARM64
 - [ ] Images triggered by a schedule event should get the `nightly` tag
 - [ ] Images triggered by push to a branch should get the branch name as tag
