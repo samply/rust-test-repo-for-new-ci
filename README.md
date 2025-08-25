@@ -2,9 +2,9 @@
 
 What has been tested:
 
-- [ ] Images should be pushed to Docker Hub
-- [ ] Images should not be pushed to Docker Hub if triggered by a pull request
-- [ ] Rust dependencies should be cached in build cache
+- [ ] Images triggered by a pull request should be pushed to GHCR
+- [ ] Images triggered by events other than a pull request should be pushed to Docker Hub
+- [ ] Rust build cache should be persisted in GitHub Actions cache
 - [ ] The build cache should be shared between branches
 - [ ] Images should be built for AMD64 and ARM64
 - [ ] Images triggered by a schedule event should get the `nightly` tag
