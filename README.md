@@ -11,3 +11,4 @@ What has been tested:
 - [ ] Images triggered by push to a branch should get the branch name as tag
 - [ ] Images triggered by push of a git tag of the format `vX.Y.Z` should get the tags `X.Y.Z`, `X.Y`, `X` (if not zero) and `latest`
 - [ ] Images triggered by push of a git tag of the format `vX.Y.Z-prerelease` should get the tag `X.Y.Z-prerelease`
+test
