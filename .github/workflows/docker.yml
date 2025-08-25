@@ -1,4 +1,4 @@
-name: Docker
+# name: Docker
 
 on:
   # Uncomment to enable nightly builds
