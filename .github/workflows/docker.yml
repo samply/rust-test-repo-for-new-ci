@@ -14,7 +14,7 @@ on:
 
 jobs:
   docker:
-    uses: ./.github/workflows/docker-reusable.yml
+    uses: ./.github/workflows/samply-docker.yml
     with:
       image_name: samply/rust-test-repo-for-new-ci
     secrets:

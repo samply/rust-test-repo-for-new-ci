@@ -1,0 +1,53 @@
+name: Rust
+
+on:
+  workflow_call:
+
+jobs:
+  samply-rust:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Write deny.toml
+        run: |
+            if [[ -f "deny.toml" ]]; then
+                echo "::warning title=cargo-deny::File deny.toml exists and will be ignored by CI! Consider removing it from your project!"
+            fi
+            cat <<EOF > deny.toml
+            [licenses]
+            allow = [
+                "MIT",
+                "Apache-2.0",
+                "ISC",
+                "BSD-3-Clause",
+                "Unicode-DFS-2016",
+                "Unicode-3.0",
+                "Zlib",
+                "OpenSSL",
+                "MPL-2.0",
+                "CDLA-Permissive-2.0"
+            ]
+            [sources.allow-org]
+            github = ["samply"]
+            [advisories]
+            ignore = [
+              { id = "RUSTSEC-2023-0071", reason = "beam needs it to build" },
+              { id = "RUSTSEC-2024-0384", reason = "transative dep of beam"},
+              { id = "RUSTSEC-2024-0436", reason = "paste is unmaintained but focus transitively depends on it" },
+            ]
+            EOF
+
+      - uses: EmbarkStudios/cargo-deny-action@v2
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      - name: Check it compiles
+        run: cargo check --all --all-targets
+
+      - name: Run tests
+        run: cargo test --all --all-features --verbose
