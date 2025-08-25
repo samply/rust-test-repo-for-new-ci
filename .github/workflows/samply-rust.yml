@@ -51,3 +51,6 @@ jobs:
 
       - name: Run tests
         run: cargo test --all --all-features --verbose
+
+      - name: Audit dependencies
+        run: cargo deny check
