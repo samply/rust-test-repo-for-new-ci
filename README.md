@@ -15,3 +15,4 @@ What has been tested:
 
 Open questions:
 * Is it okay that the Docker workflow does not depend on the Rust workflow? It is faster if they run in parallel but there is the danger that code with failing tests is pushed to Docker Hub. On the other hand this should have been caught before the PR was merged.
+* If the Docker workflow does not depend on the Rust workflow, should we recommend that components have separate `rust.yml` and `docker.yml` workflows or should we recommend that they have one `ci.yml` where they include both `samply-rust.yml` and `samply-docker.yml`? Having separate workflows makes it easier to customize run conditons (`on: push`, `on: pull_request`, etc.) but it might make the Actions tab more convoluted.
