@@ -1,4 +1,4 @@
-name: CI
+name: Docker
 
 on:
   # Uncomment to enable nightly builds
@@ -20,6 +20,3 @@ jobs:
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-
-  rust:
-    uses: ./.github/workflows/samply-rust.yml
