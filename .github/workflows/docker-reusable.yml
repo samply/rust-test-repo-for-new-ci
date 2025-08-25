@@ -24,7 +24,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ inputs.image_name }}
+          images: ${{ github.event_name == 'pull_request' && format('ghcr.io/{0}', inputs.image_name) || inputs.image_name }}
           # The "latest" tag is set according to these rules: https://github.com/docker/metadata-action#latest-tag
           tags: |
             type=schedule
