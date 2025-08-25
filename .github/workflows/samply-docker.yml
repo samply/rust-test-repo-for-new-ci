@@ -13,6 +13,7 @@ on:
 
 jobs:
   samply-docker:
+    name: Samply Docker Workflow
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

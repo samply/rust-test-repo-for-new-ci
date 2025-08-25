@@ -3,6 +3,7 @@ on:
 
 jobs:
   samply-rust:
+    name: Samply Rust Workflow
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
