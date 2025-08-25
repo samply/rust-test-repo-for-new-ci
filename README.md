@@ -1,5 +1,10 @@
 ### New Rust/Docker CI
 
+Main changes compared to old CI:
+
+* Component repositories contain multi-stage Dockerfiles that run `cargo build` (or `cargo install`) command and use [cache mounts](https://docs.docker.com/build/cache/optimize/#use-cache-mounts) for build caching.
+* The `samply-rust.yml` and `samply-docker.yml` workflows are decoupled. The latter is language-agnostic and contains now Rust-specific functionality.
+
 What has been tested:
 
 - [ ] Images triggered by a pull request should be pushed to GHCR
