@@ -1,9 +1,0 @@
-name: Rust
-
-on:
-  push:
-  pull_request:
-
-jobs:
-  rust:
-    uses: ./.github/workflows/samply-rust.yml
