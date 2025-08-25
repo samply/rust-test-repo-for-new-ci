@@ -80,6 +80,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          # Docker layer caching is disabled because it did not result in a speedup.
+          # Docker layer caching is disabled because it does not result in a speedup.
           # cache-from: type=registry,ref=${{ inputs.image_name }}:main
           # cache-to: type=inline

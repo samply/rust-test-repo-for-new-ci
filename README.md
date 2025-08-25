@@ -12,3 +12,6 @@ What has been tested:
 - [ ] Images triggered by push to a branch should get the branch name as tag
 - [ ] Images triggered by push of a git tag of the format `vX.Y.Z` should get the tags `X.Y.Z`, `X.Y`, `X` (if not zero) and `latest`
 - [ ] Images triggered by push of a git tag of the format `vX.Y.Z-prerelease` should get the tag `X.Y.Z-prerelease`
+
+Open questions:
+* Is it okay that the Docker workflow does not depend on the Rust workflow? It is faster if they run in parallel but there is the danger that code with failing tests is pushed to Docker Hub. On the other hand this should have been caught before the PR was merged.
