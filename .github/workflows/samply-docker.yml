@@ -1,10 +1,16 @@
 on:
   workflow_call:
     inputs:
-      image_name:
+      image-name:
         description: Name of the Docker image to build and push, e.g. samply/beam-proxy
         required: true
         type: string
+      build-file:
+        description: Path to the Dockerfile to use
+        required: false
+        type: string
+        default: Dockerfile
+
     secrets:
       DOCKERHUB_USERNAME:
         required: true
@@ -22,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ github.event_name == 'pull_request' && format('ghcr.io/{0}', inputs.image_name) || inputs.image_name }}
+          images: ${{ github.event_name == 'pull_request' && format('ghcr.io/{0}', inputs.image-name) || inputs.image-name }}
           # The "latest" tag is set according to these rules: https://github.com/docker/metadata-action#latest-tag
           tags: |
             type=schedule
@@ -60,8 +66,8 @@ jobs:
           path: cache-mount
           # Currently the cache action does not allow to update existing caches so we are using 
           # this workaround: https://github.com/actions/cache/issues/342#issuecomment-673371329
-          key: cache-mount-${{ github.run_id }}
-          restore-keys: cache-mount-
+          key: cache-mount-${{ hashFiles('Dockerfile') }}-${{ github.run_id }}
+          restore-keys: cache-mount-${{ hashFiles('Dockerfile') }}-
 
       # Cache mounts cannot be exported using cache-from and cache-to: https://github.com/moby/buildkit/issues/1512
       # We are using the BuildKit Cache Dance action to export and restore cache mounts manually.
@@ -70,16 +76,17 @@ jobs:
         with:
           builder: ${{ steps.setup-buildx.outputs.name }}
           cache-dir: cache-mount
-          dockerfile: Dockerfile
+          dockerfile: ${{ inputs.build-file }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
+          file: ${{ inputs.build-file }}
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Docker layer caching is disabled because it does not result in a speedup.
-          # cache-from: type=registry,ref=${{ inputs.image_name }}:main
-          # cache-to: type=inline
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max

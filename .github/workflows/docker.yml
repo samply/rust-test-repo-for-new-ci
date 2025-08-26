@@ -16,7 +16,18 @@ jobs:
   docker:
     uses: ./.github/workflows/samply-docker.yml
     with:
-      image_name: samply/rust-test-repo-for-new-ci
+      image-name: samply/rust-test-repo-for-new-ci
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  docker:
+    uses: ./.github/workflows/samply-docker.yml
+    with:
+      # In this test we push to the same image which doesn't make much sense,
+      # in a real scenario you would push to a different image.
+      image-name: samply/rust-test-repo-for-new-ci
+      build-file: Dockerfile.other
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
