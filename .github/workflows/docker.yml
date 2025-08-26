@@ -21,7 +21,7 @@ jobs:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
-  docker:
+  docker-other:
     uses: ./.github/workflows/samply-docker.yml
     with:
       # In this test we push to the same image which doesn't make much sense,
