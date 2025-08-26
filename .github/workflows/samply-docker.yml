@@ -66,8 +66,8 @@ jobs:
           path: cache-mount
           # Currently the cache action does not allow to update existing caches so we are using 
           # this workaround: https://github.com/actions/cache/issues/342#issuecomment-673371329
-          key: cache-mount-${{ hashFiles('Dockerfile') }}-${{ github.run_id }}
-          restore-keys: cache-mount-${{ hashFiles('Dockerfile') }}-
+          key: cache-mount-${{ hashFiles(inputs.build-file) }}-${{ github.run_id }}
+          restore-keys: cache-mount-${{ hashFiles(inputs.build-file) }}-
 
       # Cache mounts cannot be exported using cache-from and cache-to: https://github.com/moby/buildkit/issues/1512
       # We are using the BuildKit Cache Dance action to export and restore cache mounts manually.
