@@ -10,6 +10,10 @@ on:
         required: false
         type: string
         default: Dockerfile
+      build-args:
+        description: Build arguments to pass to docker build
+        required: false
+        type: string
 
     secrets:
       DOCKERHUB_USERNAME:
