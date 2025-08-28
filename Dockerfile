@@ -7,5 +7,5 @@ RUN --mount=type=cache,target=/usr/src/app/target \
 
 FROM debian:stable-slim
 # RUN apt-get update && apt-get install -y extra-runtime-dependencies && rm -rf /var/lib/apt/lists/*
-COPY --from=builder /usr/local/cargo/bin/rust-test-repo-for-new-ci /usr/local/bin/rust-test-repo-for-new-ci
+COPY --from=builder /usr/local/cargo/bin/rust-test-repo-for-new-ci /usr/local/bin/
 CMD ["rust-test-repo-for-new-ci"]
