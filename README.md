@@ -5,9 +5,14 @@ Main changes compared to old CI:
 * Component repositories contain multi-stage Dockerfiles that run `cargo build` (or `cargo install`) and use [cache mounts](https://docs.docker.com/build/cache/optimize/#use-cache-mounts) for build caching.
 * The `samply-rust.yml` and `samply-docker.yml` workflows are decoupled. The latter is language-agnostic and contains no Rust-specific functionality.
 
-Open questions:
-* Consider reducing `samply-rust.yml` to `samply-cargo-deny.yml` and leave tests up to individual projects.
+Open questions regarding Docker CI:
+* When triggered by a pull request, should we push to GHCR or should we not push at all?
 * Should the Docker workflow include Trivy scanning?
+
+Open questions regarding Rust CI:
+* Consider reducing `samply-rust.yml` to `samply-cargo-deny.yml` and leave tests up to individual projects.
+
+Open questions regarding workflow templates:
 * We should probably allow manually triggering the Docker workflow using `workflow_dispatch`.
 * Is it okay that the Docker workflow does not depend on the Rust workflow? It is faster if they run in parallel but there is the danger that code with failing tests is pushed to Docker Hub. On the other hand this should have been caught before the PR was merged.
 * If the Docker workflow does not depend on the Rust workflow, should we recommend that components have separate `rust.yml` and `docker.yml` workflows or should we recommend that they have one `ci.yml` where they include both `samply-rust.yml` and `samply-docker.yml`? Having separate workflows makes it easier to customize run conditons (`on: push`, `on: pull_request`, etc.) but it might make the Actions tab more convoluted.
