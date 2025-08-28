@@ -6,6 +6,7 @@ RUN --mount=type=cache,target=/usr/src/app/target \
     cargo install --path .
 
 FROM debian:stable-slim
+WORKDIR /usr/local/app
 # RUN apt-get update && apt-get install -y extra-runtime-dependencies && rm -rf /var/lib/apt/lists/*
-COPY --from=builder /usr/local/cargo/bin/rust-test-repo-for-new-ci /usr/local/bin/rust-test-repo-for-new-ci
-CMD ["rust-test-repo-for-new-ci"]
+COPY --from=builder /usr/local/cargo/bin/rust-test-repo-for-new-ci .
+CMD ["./rust-test-repo-for-new-ci"]
